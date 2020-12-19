@@ -1,0 +1,50 @@
+@model Event
+
+
+
+
+
+<div class="card">
+  <div class="card-header">
+      <h1 class="">@Model.Title</h1>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Event Coordinator: @Model.Creator.Name</h5>
+    <div class="card-text">
+        <h3>Description</h3>
+        <p>@Model.Description</p>
+        <h3>Participants:</h3>
+        <ul style="list-style: none;">
+
+            @if(@Model.Attendees.Count==0)
+            {
+                <li>None</li>
+            }
+            else
+            {
+                @foreach(RSVP r in @Model.Attendees)
+                {
+                    <li>@r.Participant.Name</li>
+                }
+            }
+        </ul>
+    </div>
+    @if (@Model.Creator.UserId == ViewBag.User.UserId)
+                {
+                    <a asp-action="DeleteEvent" asp-controller="Home" asp-route-eventId="@Model.EventId" class="btn btn-primary">Delete</a>
+                }
+                else
+                {
+                    if (@Model.Attendees.Any(r=> r.UserId == ViewBag.User.UserId))
+                    {
+                        <a asp-action="UnJoin" asp-controller="Home" asp-route-userId="@ViewBag.User.UserId" asp-route-eventId="@Model.EventId" class="btn btn-primary">Leave</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Join" asp-controller="Home" asp-route-userId="@ViewBag.User.UserId" asp-route-eventId="@Model.EventId" class="btn btn-primary">Join</a>
+                    }
+                    
+                }
+  </div>
+</div>
+

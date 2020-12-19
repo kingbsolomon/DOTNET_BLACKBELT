@@ -1,0 +1,41 @@
+@model User
+@{
+    ViewData["Title"] = "Home Page";
+}
+@* REGISTRATION *@
+<div class="jumbotron mx-auto">
+    <form action="/newuser" method="post" class="col-8 mx-auto border border-primary">
+        <h2 class="text-center mb-3 mt-3">Register</h2>
+        <div class="form-group">
+
+
+            <div class="form-group">
+                <input asp-for="Name" class="form-control" />
+                <label asp-for="Name"></label>
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" />
+                <label asp-for="Email"></label>
+                <span class="text-danger" asp-validation-for="Email"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" type="password" />
+                <label asp-for="Password"></label>
+                <span class="text-danger" asp-validation-for="Password"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Confirm" class="form-control" type="password" />
+                <label asp-for="Confirm"></label>
+                <span class="text-danger" asp-validation-for="Confirm"></span>
+            </div>
+
+            <input type="submit" value="Register" class="btn btn-primary mb-3"><br/>
+            <a href="/">Back to Login</a>
+
+        </div>
+    </form>
+</div>
